@@ -31,8 +31,8 @@ class TextProcessor:
         ''' remove filter words from the text
             return filtered text
         '''
-        ## CODE HERE ##
-        # this function splits the given text input string, then it appends the split words if its not in the stopWordsList into a list.
+        # # CODE HERE ## this function splits the given text input string, then it appends the split words if its not
+        # in the stopWordsList into a list.
         words = self.text.split()
         list = []
         stopWords = self.getStopWords()
@@ -55,8 +55,9 @@ class TextAnalyzer(TextProcessor):
             key = word and value= frequency
             return the dictionary
         '''
-        ## CODE HERE ##
-        # this returns the getFilteredText list and then it runs a for loop on getUniqWords then it counts how many times the unique words appear in getFilteredText then it stores the value for each word in a dictionary.
+        # # CODE HERE ## this returns the getFilteredText list and then it runs a for loop on getUniqWords then it
+        # counts how many times the unique words appear in getFilteredText then it stores the value for each word in
+        # a dictionary.
         frequencyOfWords = {}
         filteredText = TextProcessor.getFilteredText(self)
         for word in TextProcessor.getUniqWords(self):
@@ -81,8 +82,9 @@ class TextClassifier(TextProcessor):
              2 : ['text of doc3', 'text of doc4']
             }
         '''
-        ## CODE HERE ##
-        # this function opens 14 texts files as rowx and reads it then it splits the string into a list then depending if the string has a yes or no it divides and appends them into seperate lists then it store the yesList and No list into a dictionary.
+        # # CODE HERE ## this function opens 14 texts files as rowx and reads it then it splits the string into a
+        # list then depending if the string has a yes or no it divides and appends them into separate lists then it
+        # store the yesList and No list into a dictionary.
         corpus = {}
         yesList = []
         noList = []
@@ -106,10 +108,11 @@ class TextClassifier(TextProcessor):
     def getDocumentProbabilityGivenClass(self, passeddoc, playNoplayclass):
         ''' Calculate conditional probability of a document given its class
         '''
-        ## CODE HERE ##
-        # this function returns the loadCorpus function and assigns totalYes variable as the length of the Play is Yes key in corpus and assigns the totalNo variable as the length of the Play is No key in corpus
-        # depending if the given input of playNoplayclass is no play or play it gets the frequency of the words from the corpus key then it adds the probablity of each word in the yes or no list then it finally
-        # multiplies the probablity of all the words given to get the probability of the doc/list given
+        # # CODE HERE ## this function returns the loadCorpus function and assigns totalYes variable as the length of
+        # the Play is Yes key in corpus and assigns the totalNo variable as the length of the Play is No key in
+        # corpus depending if the given input of playNoplayclass is no play or play it gets the frequency of the
+        # words from the corpus key then it adds the probability of each word in the yes or no list then it finally
+        # multiplies the probability of all the words given to get the probability of the doc/list given
         frequency = {}
         no = []
         yes = []
@@ -152,10 +155,12 @@ class TextClassifier(TextProcessor):
     def getPriorProbability(self, priorProbabilityClass):
         ''' return prior probability of a text class
         '''
-        ## CODE HERE ##
-        # this function assigns corpus as the return of the loadCorpus function then it assigns listNo as the value of the Play is No key and listYes as the value of the Play is Yes key listtotal is the combination of listYes and listNo
-        # then it calculates the priorProbabilityPlay and priorProbabilityNoPlay by dividing the length of either yes or no by the lenth of the totallist then depending if the priorProbabilityClass input is play or no play it will return
-        # the priorProbabilityPlay calculation or the priorProbabilityNoPlay calculation
+        # # CODE HERE ## this function assigns corpus as the return of the loadCorpus function then it assigns listNo
+        # as the value of the Play is No key and listYes as the value of the Play is Yes key listtotal is the
+        # combination of listYes and listNo then it calculates the priorProbabilityPlay and priorProbabilityNoPlay by
+        # dividing the length of either yes or no by the length of the totallist then depending if the
+        # priorProbabilityClass input is play or no play it will return the priorProbabilityPlay calculation or the
+        # priorProbabilityNoPlay calculation
         corpus = self.loadCorpus()
         listNo = corpus['Play is No']
         listYes = corpus['Play is Yes']
@@ -171,17 +176,18 @@ class TextClassifier(TextProcessor):
     def getClassProbabilityGivenDocument(self, passeddoc, playNoplayclass):  #
         ''' return class probability given a document
         '''
-        ## CODE HERE ##
-        # this function returns getDocumentProbabilityGivenClass times getPriorProbability to get the getClassProbabilityGivenDocument
+        # # CODE HERE ## this function returns getDocumentProbabilityGivenClass times getPriorProbability to get the
+        # getClassProbabilityGivenDocument
         return self.getDocumentProbabilityGivenClass(passeddoc, playNoplayclass) * self.getPriorProbability(
             playNoplayclass)
 
     def getClassGivenDocument(self, passeddoc):
         ''' return class probability given a document
         '''
-        ## CODE HERE ##
-        # this function calls the getClassProbabilityGivenDocument and inputs the given doc/list it gets the probability of the list and depending on play or no play which ever
-        # value of the given docs is higher it will return for example if play was higher then it will retun play if the value of no play is higher it will return no play
+        # # CODE HERE ## this function calls the getClassProbabilityGivenDocument and inputs the given doc/list it
+        # gets the probability of the list and depending on play or no play which ever value of the given docs is
+        # higher it will return for example if play was higher then it will return play if the value of no play is
+        # higher it will return no play
         play = self.getClassProbabilityGivenDocument(passeddoc, 'play')
         noPlay = self.getClassProbabilityGivenDocument(passeddoc, 'no play')
         if play > noPlay:
